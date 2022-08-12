@@ -12,6 +12,7 @@
 			"plugin:import/recommended"
 	],
 	"parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["server.js"],
 	"parserOptions": {
 			"ecmaFeatures": {
 					"jsx": true
@@ -86,8 +87,6 @@
     "no-underscore-dangle": "off",
     "no-restricted-globals": "warn",
     "consistent-return": "off",
-    "no-shadow": "warn",
-    "import/no-cycle": "warn",
     "radix": "off",
     "react/jsx-props-no-spreading": "off",
     "no-case-declarations": "off",
