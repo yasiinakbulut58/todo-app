@@ -1,0 +1,28 @@
+{
+    "todos": [
+      {
+        "title": "ReactJs",
+        "createdAt": "15.04.2020 15:20",
+        "completed": true,
+        "id": 1
+      },
+      {
+        "title": "NodeJs",
+        "createdAt": "15.04.2020 15:20",
+        "completed": true,
+        "id": 2
+      },
+      {
+        "title": "Java",
+        "createdAt": "15.04.2020 15:20",
+        "completed": false,
+        "id": 3
+      },
+      {
+        "title": "VueJs",
+        "createdAt": "15.04.2020 15:20",
+        "completed": true,
+        "id": 4
+      }
+    ]
+  }
