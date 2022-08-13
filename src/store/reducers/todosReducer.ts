@@ -11,6 +11,7 @@ export interface ITodo {
 export interface IRootState {
   todos: ITodo[];
   loading: boolean;
+  requestId: string | null;
   error: string | null;
   filter: boolean | null;
 }
@@ -18,6 +19,7 @@ export interface IRootState {
 const initialState = {
   todos: [],
   loading: false,
+  requestId: null,
   filter: null,
   error: null,
 };
@@ -48,6 +50,11 @@ export const todoReducer: Reducer<IRootState, Action> = (
       return {
         ...state,
         filter: action.payload,
+      };
+    case ActionType.SET_REQUEST_ID:
+      return {
+        ...state,
+        requestId: action.payload,
       };
     case ActionType.SET_ADD_TODO:
       return {

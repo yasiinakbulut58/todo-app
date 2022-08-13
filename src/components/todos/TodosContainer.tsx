@@ -24,6 +24,7 @@ const mapStateToProps = (store: IAppState) => {
     loading: store.todosState.loading,
     error: store.todosState.error,
     filter: store.todosState.filter,
+    requestId: store.todosState.requestId,
   };
 };
 

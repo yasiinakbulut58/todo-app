@@ -7,11 +7,19 @@ import Switch from "../common/Switch";
 
 type Props = {
   type: "add" | "edit";
+  requestId: string | null;
   title?: string;
+  onRequestClose: () => void;
   onSubmit: (values: any) => void;
 };
 
-const TaskModal: React.FC<Props> = ({ type, title, onSubmit }) => {
+const TaskModal: React.FC<Props> = ({
+  type,
+  requestId,
+  title,
+  onRequestClose,
+  onSubmit,
+}) => {
   const {
     register,
     handleSubmit,
@@ -77,7 +85,15 @@ const TaskModal: React.FC<Props> = ({ type, title, onSubmit }) => {
           />
         </div>
         <div className="footer">
-          <button className="btn" type="submit">
+          <button
+            className="btn btn-cancel"
+            disabled={!!requestId}
+            onClick={onRequestClose}
+            type="button"
+          >
+            Cancel
+          </button>
+          <button className="btn" disabled={!!requestId} type="submit">
             {type === "add" ? "Add" : "Update"}
           </button>
         </div>
@@ -91,11 +107,13 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 10px;
 
     .btn {
       height: 32px;
-      width: 130px;
-      background: #035687;
+      width: max-content;
+      padding: 0 10px;
+      background: rgb(111 187 21);
       border: none;
       display: flex;
       justify-content: center;
@@ -106,8 +124,15 @@ const Container = styled.div`
       cursor: pointer;
       transition: 200ms;
 
+      &.btn-cancel {
+        background: rgb(219, 222, 237);
+        &:hover {
+          box-shadow: 0 0 0 2px rgb(219, 222, 237);
+        }
+      }
+
       &:hover {
-        box-shadow: 0 0 0 2px #035687;
+        box-shadow: 0 0 0 2px rgb(111 187 21);
       }
     }
     .btn[disabled] {

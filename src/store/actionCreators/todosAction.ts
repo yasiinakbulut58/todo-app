@@ -1,6 +1,6 @@
 import { ActionCreator, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import axios from "axios";
+import api from "../../api";
 
 import { ActionType, Action } from "../actionTypes/todosType";
 import { IRootState, ITodo } from "../reducers/todosReducer";
@@ -14,7 +14,7 @@ export const getTodos: ActionCreator<
     });
 
     try {
-      const { data } = await axios.get("/todos?_sort=createdAt&_order=desc");
+      const { data } = await api.getTodos();
 
       dispatch({
         type: ActionType.GET_POST_TODOS_SUCCESS,
@@ -42,12 +42,12 @@ export const addTodo: ActionCreator<
   ThunkAction<Promise<any>, IRootState, null, Action>
 > = (newTodo: ITodo) => {
   return async (dispatch: Dispatch) => {
+    dispatch({
+      type: ActionType.SET_REQUEST_ID,
+      payload: newTodo.id,
+    });
     try {
-      const response = await axios.post("/todos", newTodo, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await api.addTodo(newTodo);
 
       if (response.status === 201) {
         dispatch({
@@ -58,6 +58,10 @@ export const addTodo: ActionCreator<
     } catch (err: any) {
       // err
     }
+    dispatch({
+      type: ActionType.SET_REQUEST_ID,
+      payload: null,
+    });
   };
 };
 
@@ -65,8 +69,12 @@ export const removeTodo: ActionCreator<
   ThunkAction<Promise<any>, IRootState, null, Action>
 > = (id: string) => {
   return async (dispatch: Dispatch) => {
+    dispatch({
+      type: ActionType.SET_REQUEST_ID,
+      payload: id,
+    });
     try {
-      const response = await axios.delete(`/todos/${id}`);
+      const response = await api.deleteTodo(id);
 
       if (response.status === 200) {
         dispatch({
@@ -77,6 +85,10 @@ export const removeTodo: ActionCreator<
     } catch (err: any) {
       // err
     }
+    dispatch({
+      type: ActionType.SET_REQUEST_ID,
+      payload: null,
+    });
   };
 };
 
@@ -84,12 +96,12 @@ export const updateTodo: ActionCreator<
   ThunkAction<Promise<any>, IRootState, null, Action>
 > = (updTodo: ITodo) => {
   return async (dispatch: Dispatch) => {
+    dispatch({
+      type: ActionType.SET_REQUEST_ID,
+      payload: updTodo.id,
+    });
     try {
-      const response = await axios.put(`/todos/${updTodo.id}`, updTodo, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await api.updateTodo(updTodo);
 
       if (response.status === 200) {
         dispatch({
@@ -100,5 +112,9 @@ export const updateTodo: ActionCreator<
     } catch (err: any) {
       // err
     }
+    dispatch({
+      type: ActionType.SET_REQUEST_ID,
+      payload: null,
+    });
   };
 };

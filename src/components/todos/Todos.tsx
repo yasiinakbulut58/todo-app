@@ -23,6 +23,7 @@ export class Todos extends React.Component<
       error,
       loading,
       filter,
+      requestId,
       setFilter,
       addTodo,
       removeTodo,
@@ -33,7 +34,11 @@ export class Todos extends React.Component<
     return (
       <TodoContainer>
         <ContentWrapper>
-          <Header setFilter={setFilter} addTodo={addTodo} />
+          <Header
+            requestId={requestId}
+            setFilter={setFilter}
+            addTodo={addTodo}
+          />
 
           {loading ? (
             <>Loading...</>
@@ -44,6 +49,7 @@ export class Todos extends React.Component<
                   ? todos.filter((item) => item.completed === filter)
                   : todos
               }
+              requestId={requestId}
               removeTodo={removeTodo}
               updateTodo={updateTodo}
             />

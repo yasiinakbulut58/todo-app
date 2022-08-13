@@ -9,10 +9,16 @@ import { useCallback, useState } from "react";
 
 type Props = {
   todos: ITodo[];
+  requestId: string | null;
   removeTodo: (id: string) => void;
   updateTodo: (updTodo: ITodo) => void;
 };
-const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
+const List: React.FC<Props> = ({
+  todos,
+  requestId,
+  removeTodo,
+  updateTodo,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<ITodo | null>(null);
 
@@ -25,6 +31,7 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
           completed: values.completed || false,
         });
       }
+
       setIsOpen(false);
       setSelectedTask(null);
     },
@@ -40,6 +47,7 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
       )}
       <Switch
         checked={todo.completed}
+        disabled={requestId === todo.id}
         onChange={(e) => {
           const { checked } = e.target;
           updateTodo({ ...todo, completed: checked });
@@ -64,6 +72,7 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
         )}
         <button
           type="button"
+          disabled={requestId === todo.id}
           onClick={() => removeTodo(todo.id)}
           className="btn btn-clear"
         >
@@ -94,6 +103,8 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
       >
         <TaskModal
           type="edit"
+          requestId={requestId}
+          onRequestClose={() => setIsOpen(false)}
           title={selectedTask?.title}
           onSubmit={onSubmit}
         />
