@@ -1,5 +1,7 @@
+import TodosContainer from "./components/todos/TodosContainer";
+
 function App() {
-  return <div>Hello React</div>;
+  return <TodosContainer />;
 }
 
 export default App;
