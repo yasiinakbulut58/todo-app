@@ -5,13 +5,11 @@ import {
   addTodo,
   getTodos,
   removeTodo,
-  setFilter,
   updateTodo,
 } from "../../store/actionCreators/todosAction";
 import { Todos } from "./Todos";
 
 const mapDispatchToProps = {
-  setFilter,
   getTodos,
   addTodo,
   removeTodo,
@@ -23,7 +21,6 @@ const mapStateToProps = (store: IAppState) => {
     todos: store.todosState.todos,
     loading: store.todosState.loading,
     error: store.todosState.error,
-    filter: store.todosState.filter,
     requestId: store.todosState.requestId,
   };
 };

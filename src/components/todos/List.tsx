@@ -35,7 +35,7 @@ const List: React.FC<Props> = ({
       setIsOpen(false);
       setSelectedTask(null);
     },
-    [updateTodo, selectedTask],
+    [selectedTask],
   );
 
   const Todo = (todo: ITodo) => (

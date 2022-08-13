@@ -49,6 +49,7 @@
         "depth": 25
       }
     ],
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "import/extensions": "off",
     "react/jsx-filename-extension": [

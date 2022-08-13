@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import useOnClickOutside from "../../hooks/useClickOutside";
 import Icon from "./Icon";
@@ -26,12 +26,9 @@ export const Dropdown: React.FC<Props> = ({
   const handleItemClick = (e: any) => {
     const { id } = e.target;
     setSelectedItem(id);
+    onSelected(id);
     setOpen(false);
   };
-
-  useEffect(() => {
-    onSelected(selectedItem);
-  }, [onSelected, selectedItem]);
 
   return (
     <Container ref={ref}>

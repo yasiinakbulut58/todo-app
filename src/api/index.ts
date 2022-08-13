@@ -2,10 +2,15 @@ import { ITodo } from "../store/reducers/todosReducer";
 import * as http from "./http-common";
 
 class API {
-  static async getTodos() {
+  static async getTodos(completed: string) {
+    const searchParams = new URLSearchParams({
+      _sort: "createdAt",
+      _order: "desc",
+      ...(completed !== "all" ? { completed: completed } : {}),
+    });
     const options = {
       method: "get",
-      url: "/todos?_sort=createdAt&_order=desc",
+      url: `/todos?${searchParams}`,
     };
     return http.jsonServer(options);
   }

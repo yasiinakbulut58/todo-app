@@ -12,9 +12,7 @@ const TodoContainer = styled.div`
 
 const ListWrapper = styled.div`
   overflow-y: auto;
-  width: calc(100% + 10px);
   margin-left: -5px;
-  padding: 0 5px;
   max-height: 500px;
 
   scrollbar-width: thin; //for firefox

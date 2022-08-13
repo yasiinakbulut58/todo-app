@@ -7,46 +7,35 @@ import { ContentWrapper, TodoContainer } from "./Styled";
 
 export class Todos extends React.Component<
   IRootState & {
-    setFilter: (complete: boolean | null) => void;
-    getTodos: () => void;
+    getTodos: (completed: string) => void;
     addTodo: (todo: ITodo) => void;
     removeTodo: (id: string) => void;
     updateTodo: (updTodo: ITodo) => void;
   }
 > {
   componentWillMount() {
-    this.props.getTodos();
+    this.props.getTodos("all");
   }
   public render() {
     const {
       todos,
       loading,
-      filter,
       requestId,
-      setFilter,
       addTodo,
       removeTodo,
       updateTodo,
+      getTodos,
     } = this.props;
 
     return (
       <TodoContainer>
         <ContentWrapper>
-          <Header
-            requestId={requestId}
-            setFilter={setFilter}
-            addTodo={addTodo}
-          />
-
+          <Header requestId={requestId} addTodo={addTodo} getTodos={getTodos} />
           {loading ? (
             <>Loading...</>
           ) : (
             <List
-              todos={
-                filter !== null
-                  ? todos.filter((item) => item.completed === filter)
-                  : todos
-              }
+              todos={todos}
               requestId={requestId}
               removeTodo={removeTodo}
               updateTodo={updateTodo}

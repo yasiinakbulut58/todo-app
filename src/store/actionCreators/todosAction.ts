@@ -8,14 +8,14 @@ import { IRootState, ITodo } from "../reducers/todosReducer";
 
 export const getTodos: ActionCreator<
   ThunkAction<Promise<any>, IRootState, null, Action>
-> = () => {
+> = (completed: string) => {
   return async (dispatch: Dispatch) => {
     dispatch({
       type: ActionType.GET_POST_TODOS_PENDING,
     });
 
     try {
-      const { data } = await api.getTodos();
+      const { data } = await api.getTodos(completed);
 
       dispatch({
         type: ActionType.GET_POST_TODOS_SUCCESS,
@@ -27,15 +27,6 @@ export const getTodos: ActionCreator<
         payload: err.message,
       });
     }
-  };
-};
-
-export const setFilter = (completed: boolean | null) => {
-  return (dispatch: Dispatch) => {
-    dispatch({
-      type: ActionType.SET_TODOS_FILTER,
-      payload: completed,
-    });
   };
 };
 

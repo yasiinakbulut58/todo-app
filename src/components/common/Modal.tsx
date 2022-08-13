@@ -95,8 +95,8 @@ export const Container = styled.div`
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #dbdeed;
-    border: 1px solid #dbdeed;
+    background: rgb(249, 250, 254);
+    border: 1px solid rgb(249, 250, 254);
     border-radius: 50%;
     cursor: pointer;
     transition: 200ms;
@@ -109,11 +109,11 @@ export const Container = styled.div`
     svg {
       width: 16px;
       transform: rotate(45deg);
-      fill: #fff;
+      fill: rgb(177, 179, 217);
     }
 
     &:hover {
-      box-shadow: 0 0 0 2px #dbdeed;
+      border: 1px solid rgb(177, 179, 217);
     }
   }
   .modal-header {

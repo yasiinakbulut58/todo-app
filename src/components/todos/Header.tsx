@@ -10,8 +10,8 @@ import TaskModal from "./Modal";
 
 type Props = {
   requestId: string | null;
-  setFilter: (completed: boolean | null) => void;
   addTodo: (todo: ITodo) => void;
+  getTodos: (completed: string) => void;
 };
 
 const list = [
@@ -20,7 +20,7 @@ const list = [
   { value: "true", label: "Completed" },
 ];
 
-const Header: React.FC<Props> = ({ requestId, setFilter, addTodo }) => {
+const Header: React.FC<Props> = ({ requestId, addTodo, getTodos }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = useCallback(
@@ -33,7 +33,7 @@ const Header: React.FC<Props> = ({ requestId, setFilter, addTodo }) => {
       });
       setIsOpen(false);
     },
-    [addTodo],
+    [],
   );
 
   return (
@@ -44,9 +44,7 @@ const Header: React.FC<Props> = ({ requestId, setFilter, addTodo }) => {
       <div className="header">
         <Dropdown
           list={list}
-          onSelected={(value) =>
-            setFilter(value !== "all" ? value === "true" : null)
-          }
+          onSelected={(value) => getTodos(value)}
           defaultValue="all"
         />
         <button
