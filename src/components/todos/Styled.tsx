@@ -55,7 +55,7 @@ const ListWrapper = styled.div`
 
       .completed {
         background-color: rgb(111 187 21);
-        height: 20px;
+        height: 25px;
         margin-left: 10px;
         padding: 0px 20px;
         display: flex;

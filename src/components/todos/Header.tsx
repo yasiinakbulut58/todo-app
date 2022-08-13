@@ -23,11 +23,11 @@ const Header: React.FC<Props> = ({ setFilter, addTodo }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = useCallback(
-    (values: { title: string }) => {
+    (values: { title: string; completed: boolean }) => {
       addTodo({
         id: uuid(),
         title: values.title,
-        completed: false,
+        completed: values.completed || false,
         createdAt: new Date().toLocaleString(),
       });
       setIsOpen(false);

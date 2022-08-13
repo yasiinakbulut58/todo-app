@@ -17,11 +17,12 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
   const [selectedTask, setSelectedTask] = useState<ITodo | null>(null);
 
   const onSubmit = useCallback(
-    (values: { title: string }) => {
+    (values: { title: string; completed: boolean }) => {
       if (selectedTask) {
         updateTodo({
           ...selectedTask,
           title: values.title,
+          completed: values.completed || false,
         });
       }
       setIsOpen(false);

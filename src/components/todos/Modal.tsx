@@ -1,8 +1,9 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 import CustomInput from "../common/Input";
 
 import CustomLabel from "../common/Label";
+import Switch from "../common/Switch";
 
 type Props = {
   type: "add" | "edit";
@@ -14,6 +15,8 @@ const TaskModal: React.FC<Props> = ({ type, title, onSubmit }) => {
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -48,6 +51,30 @@ const TaskModal: React.FC<Props> = ({ type, title, onSubmit }) => {
               </div>
             )}
           </div>
+        </div>
+        <div
+          style={{
+            marginBottom: 20,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <CustomLabel htmlFor="completed">Completed</CustomLabel>
+          <Controller
+            render={() => (
+              <Switch
+                defaultChecked={false}
+                onChange={(e) => {
+                  const { checked } = e.target;
+                  setValue("completed", checked, {
+                    shouldValidate: true,
+                  });
+                }}
+              />
+            )}
+            name="completed"
+            control={control}
+          />
         </div>
         <div className="footer">
           <button className="btn" type="submit">

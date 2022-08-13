@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { forwardRef } from "react";
 import styled from "styled-components";
+type Props = React.InputHTMLAttributes<HTMLInputElement>;
 
-const Switch: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = ({
-  name,
-  ...props
-}) => (
-  <Container>
-    <input type="checkbox" {...props} />
-    <span />
-  </Container>
+const Switch = forwardRef<HTMLInputElement, Props>(
+  ({ style, ...props }, ref) => (
+    <Container>
+      <input type="checkbox" {...props} />
+      <span />
+    </Container>
+  ),
 );
 
 const Container = styled.label`
@@ -34,8 +35,8 @@ const Container = styled.label`
     &:hover {
       background-color: #dbdeed;
       &:before {
-        background-color: #035687;
-        box-shadow: 0 0 0 2px #035687;
+        background-color: #fff;
+        box-shadow: 0 0 0 2px #fff;
       }
     }
     &:before {
@@ -44,7 +45,7 @@ const Container = styled.label`
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background-color: #035687;
+      background-color: #fff;
       position: relative;
       transition: 0.3s;
       left: 0;
@@ -53,14 +54,14 @@ const Container = styled.label`
   }
 
   input:checked + span {
-    background-color: #035687;
+    background-color: rgb(111 187 21);
     &:hover {
       &:before {
-        box-shadow: 0 0 0 2px #dbdeed;
+        box-shadow: 0 0 0 2px #fff;
       }
     }
     &:before {
-      background-color: #dbdeed;
+      background-color: #fff;
       left: 100%;
       transform: translateX(-100%);
     }
