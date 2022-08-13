@@ -3,7 +3,7 @@
     {
       "id": "24c5937d-c10f-41fa-8bd7-7f9426cba3b2",
       "title": "Make Salad",
-      "completed": false,
+      "completed": true,
       "createdAt": "13.08.2022 12:25:18"
     },
     {
@@ -19,22 +19,22 @@
       "createdAt": "13.08.2022 12:40:37"
     },
     {
-      "id": "d1cc14ef-26e9-4437-883d-d5982986a8e8",
-      "title": "Learn React.js",
-      "completed": false,
-      "createdAt": "13.08.2022 12:42:36"
-    },
-    {
       "id": "e7db3f4c-d457-4364-bf82-386cd9fe8c5e",
-      "title": "Learn Java Spring",
+      "title": "Learn Java Spring Boot",
       "completed": false,
       "createdAt": "13.08.2022 12:42:46"
     },
     {
       "id": "cc37e672-c5da-45f8-96e4-6fb3ec4053f5",
       "title": "Learn Vue.js",
-      "completed": false,
+      "completed": true,
       "createdAt": "13.08.2022 12:42:56"
+    },
+    {
+      "id": "bc0c6443-7d6e-4ad6-a527-67c7035e3874",
+      "title": "Learn React.js",
+      "completed": true,
+      "createdAt": "13.08.2022 13:14:04"
     }
   ]
 }

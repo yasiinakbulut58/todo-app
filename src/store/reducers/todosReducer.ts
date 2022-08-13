@@ -1,9 +1,8 @@
 import { Reducer } from "redux";
-
 import { Action, ActionType } from "../actionTypes/todosType";
 
 export interface ITodo {
-  id: number;
+  id: string;
   title: string;
   createdAt: string;
   completed: boolean;
@@ -49,6 +48,27 @@ export const todoReducer: Reducer<IRootState, Action> = (
       return {
         ...state,
         filter: action.payload,
+      };
+    case ActionType.SET_ADD_TODO:
+      return {
+        ...state,
+        todos: [action.payload, ...state.todos],
+      };
+    case ActionType.SET_REMOVE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((item) => item.id !== action.payload),
+      };
+    case ActionType.SET_UPDATE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((item) =>
+          item.id === action.payload.id
+            ? {
+                ...action.payload,
+              }
+            : { ...item },
+        ),
       };
     default:
       return state;
