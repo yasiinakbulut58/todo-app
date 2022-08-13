@@ -14,6 +14,7 @@ type Props = {
 };
 
 const list = [
+  { value: "all", label: "All" },
   { value: "false", label: "Incompleted" },
   { value: "true", label: "Completed" },
 ];
@@ -42,7 +43,10 @@ const Header: React.FC<Props> = ({ setFilter, addTodo }) => {
       <div className="header">
         <Dropdown
           list={list}
-          onSelected={(value) => setFilter(value ? value === "true" : null)}
+          onSelected={(value) =>
+            setFilter(value !== "all" ? value === "true" : null)
+          }
+          defaultValue="all"
         />
         <button
           className="btn btn-add"

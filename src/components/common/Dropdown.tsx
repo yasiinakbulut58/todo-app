@@ -1,25 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import useOnClickOutside from "../../hooks/useClickOutside";
 import Icon from "./Icon";
 
 type Props = {
   list: { value: any; label: string }[];
+  defaultValue: string;
   onSelected: (selectedItem: any) => void;
 };
 
-export const Dropdown: React.FC<Props> = ({ list, onSelected }) => {
+export const Dropdown: React.FC<Props> = ({
+  list,
+  onSelected,
+  defaultValue,
+}) => {
   const [isOpen, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<any>(defaultValue);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(ref, () => setOpen(false));
 
   const toggleDropdown = () => setOpen(!isOpen);
 
   const handleItemClick = (e: any) => {
     const { id } = e.target;
-    if (selectedItem === id) {
-      setSelectedItem(null);
-    } else {
-      setSelectedItem(id);
-    }
+    setSelectedItem(id);
     setOpen(false);
   };
 
@@ -28,7 +34,7 @@ export const Dropdown: React.FC<Props> = ({ list, onSelected }) => {
   }, [onSelected, selectedItem]);
 
   return (
-    <Container>
+    <Container ref={ref}>
       <div className="dropdown-header" onClick={toggleDropdown}>
         {selectedItem
           ? list?.find(
