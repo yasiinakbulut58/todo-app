@@ -82,7 +82,7 @@ const List: React.FC<Props> = ({
     </>
   );
 
-  if (todos.length === 0 || !todos.length)
+  if (!todos || todos.length === 0)
     return <EmptyWrapper>No task🥳</EmptyWrapper>;
 
   return (

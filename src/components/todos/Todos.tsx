@@ -20,7 +20,6 @@ export class Todos extends React.Component<
   public render() {
     const {
       todos,
-      error,
       loading,
       filter,
       requestId,
@@ -30,7 +29,6 @@ export class Todos extends React.Component<
       updateTodo,
     } = this.props;
 
-    if (error) return <>Bir hata oluştu.</>;
     return (
       <TodoContainer>
         <ContentWrapper>

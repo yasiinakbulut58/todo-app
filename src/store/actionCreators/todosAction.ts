@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { ActionCreator, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import api from "../../api";
@@ -54,6 +55,7 @@ export const addTodo: ActionCreator<
           type: ActionType.SET_ADD_TODO,
           payload: newTodo,
         });
+        toast.success("Task successfully added");
       }
     } catch (err: any) {
       // err
@@ -81,6 +83,7 @@ export const removeTodo: ActionCreator<
           type: ActionType.SET_REMOVE_TODO,
           payload: id,
         });
+        toast.success("Task successfully deleted");
       }
     } catch (err: any) {
       // err
@@ -108,6 +111,7 @@ export const updateTodo: ActionCreator<
           type: ActionType.SET_UPDATE_TODO,
           payload: updTodo,
         });
+        toast.success("Task successfully updated");
       }
     } catch (err: any) {
       // err
