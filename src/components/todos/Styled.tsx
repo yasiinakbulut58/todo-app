@@ -96,13 +96,13 @@ const TextWrapper = styled.div<{
   completed: boolean;
 }>`
   font-weight: 600;
+  word-break: break-word;
   text-decoration: ${({ completed }) =>
     completed ? "line-through" : "initial"}; ;
 `;
 
 const ContentWrapper = styled.div`
   width: 550px;
-  min-height: 500px;
   background: rgba(255, 255, 255, 0.25);
   padding: 20px;
   margin-top: 10px;
