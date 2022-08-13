@@ -9,9 +9,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ToastContainerBase from "./ToastContainer";
+import { getTodos } from "./store/actionCreators/todosAction";
 
 // Generate the store
 const store = configureStore();
+store.dispatch(getTodos("all"));
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(

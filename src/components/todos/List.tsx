@@ -6,20 +6,17 @@ import styled from "styled-components";
 import Modal from "../common/Modal";
 import TaskModal from "./Modal";
 import { useCallback, useState } from "react";
+import ConfirmModal from "./ConfirmModal";
 
 type Props = {
   todos: ITodo[];
-  requestId: string | null;
+  loading: boolean;
   removeTodo: (id: string) => void;
   updateTodo: (updTodo: ITodo) => void;
 };
-const List: React.FC<Props> = ({
-  todos,
-  requestId,
-  removeTodo,
-  updateTodo,
-}) => {
+const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenConfirm, setIsOpenConfirm] = useState(false);
   const [selectedTask, setSelectedTask] = useState<ITodo | null>(null);
 
   const onSubmit = useCallback(
@@ -47,7 +44,7 @@ const List: React.FC<Props> = ({
       )}
       <Switch
         checked={todo.completed}
-        disabled={requestId === todo.id}
+        disabled={loading}
         onChange={(e) => {
           const { checked } = e.target;
           updateTodo({ ...todo, completed: checked });
@@ -62,6 +59,7 @@ const List: React.FC<Props> = ({
           <button
             type="button"
             className="btn btn-edit"
+            disabled={loading}
             onClick={() => {
               setSelectedTask(todo);
               setIsOpen(true);
@@ -72,9 +70,12 @@ const List: React.FC<Props> = ({
         )}
         <button
           type="button"
-          disabled={requestId === todo.id}
-          onClick={() => removeTodo(todo.id)}
-          className="btn btn-clear"
+          disabled={loading}
+          onClick={() => {
+            setSelectedTask(todo);
+            setIsOpenConfirm(true);
+          }}
+          className="btn btn-delete"
         >
           <Icon name="delete" />
         </button>
@@ -87,6 +88,12 @@ const List: React.FC<Props> = ({
 
   return (
     <ListWrapper>
+      {loading && (
+        <div className="loading">
+          {" "}
+          <div className="loading-spinner" />
+        </div>
+      )}
       {todos.map((item, idx) => (
         <div
           className="todo-box"
@@ -98,17 +105,47 @@ const List: React.FC<Props> = ({
       ))}
       <Modal
         isOpen={isOpen}
-        onRequestClose={() => setIsOpen(false)}
+        onRequestClose={() => {
+          setIsOpen(false);
+          setSelectedTask(null);
+        }}
         title="Update Task"
       >
         <TaskModal
           type="edit"
-          requestId={requestId}
-          onRequestClose={() => setIsOpen(false)}
+          loading={loading}
+          onRequestClose={() => {
+            setIsOpen(false);
+            setSelectedTask(null);
+          }}
           title={selectedTask?.title}
           onSubmit={onSubmit}
         />
       </Modal>
+      {selectedTask && (
+        <Modal
+          isOpen={isOpenConfirm}
+          onRequestClose={() => {
+            setIsOpenConfirm(false);
+            setSelectedTask(null);
+          }}
+          title="Confirm"
+        >
+          <ConfirmModal
+            loading={loading}
+            desc={`Are you sure you want to delete '${selectedTask.title}'?`}
+            onRequestClose={() => {
+              setIsOpenConfirm(false);
+              setSelectedTask(null);
+            }}
+            onDelete={() => {
+              removeTodo(selectedTask.id);
+              setIsOpenConfirm(false);
+              setSelectedTask(null);
+            }}
+          />
+        </Modal>
+      )}
     </ListWrapper>
   );
 };

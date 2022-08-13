@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { IAppState } from "../../store";
 import {
   addTodo,
+  deleteAllTodos,
   getTodos,
   removeTodo,
   updateTodo,
@@ -14,6 +15,7 @@ const mapDispatchToProps = {
   addTodo,
   removeTodo,
   updateTodo,
+  deleteAllTodos,
 };
 
 const mapStateToProps = (store: IAppState) => {
@@ -21,7 +23,6 @@ const mapStateToProps = (store: IAppState) => {
     todos: store.todosState.todos,
     loading: store.todosState.loading,
     error: store.todosState.error,
-    requestId: store.todosState.requestId,
   };
 };
 

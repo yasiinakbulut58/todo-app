@@ -7,7 +7,7 @@ export enum ActionType {
   SET_ADD_TODO = "SET_ADD_TODO",
   SET_REMOVE_TODO = "SET_REMOVE_TODO",
   SET_UPDATE_TODO = "SET_UPDATE_TODO",
-  SET_REQUEST_ID = "SET_REQUEST_ID",
+  SET_LOADING = "SET_LOADING",
 }
 
 interface actionPending {
@@ -34,9 +34,9 @@ interface setRemoveTodo {
   payload: string;
 }
 
-interface setRequestId {
-  type: ActionType.SET_REQUEST_ID;
-  payload: string | null;
+interface setLoading {
+  type: ActionType.SET_LOADING;
+  payload: boolean;
 }
 
 export type Action =
@@ -44,5 +44,5 @@ export type Action =
   | actionSuccess
   | actionFail
   | setRemoveTodo
-  | setRequestId
+  | setLoading
   | setAddOrUpdateTodo;

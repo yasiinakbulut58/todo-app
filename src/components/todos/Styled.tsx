@@ -14,6 +14,7 @@ const ListWrapper = styled.div`
   overflow-y: auto;
   margin-left: -5px;
   max-height: 500px;
+  position: relative;
 
   scrollbar-width: thin; //for firefox
   scrollbar-color: #035687 transparent; //for firefox
@@ -31,6 +32,35 @@ const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  .loading {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    border-radius: 10px;
+    background: rgb(255 255 255 / 60%);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .loading-spinner {
+      width: 25px;
+      height: 25px;
+      border: 3px solid #dbdeed;
+      border-top: 3px solid #035687;
+      border-radius: 50%;
+      animation: spinner 1.5s linear infinite;
+    }
+  }
 
   .todo-box {
     display: flex;
@@ -122,7 +152,7 @@ const ContentWrapper = styled.div`
     transition: 200ms;
     &.btn-add,
     &.btn-edit,
-    &.btn-clear {
+    &.btn-delete {
       width: max-content;
       background-color: #dbdeed;
       color: #035687;
@@ -135,9 +165,18 @@ const ContentWrapper = styled.div`
         height: auto;
       }
     }
+
+    &.btn-clear {
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      width: max-content;
+      padding: 0 10px;
+    }
   }
   .btn[disabled] {
     cursor: not-allowed;
+    opacity: 0.5;
   }
   .header {
     display: flex;

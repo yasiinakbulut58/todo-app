@@ -35,8 +35,8 @@ export const addTodo: ActionCreator<
 > = (newTodo: ITodo) => {
   return async (dispatch: Dispatch) => {
     dispatch({
-      type: ActionType.SET_REQUEST_ID,
-      payload: newTodo.id,
+      type: ActionType.SET_LOADING,
+      payload: true,
     });
     try {
       const response = await api.addTodo(newTodo);
@@ -52,8 +52,8 @@ export const addTodo: ActionCreator<
       // err
     }
     dispatch({
-      type: ActionType.SET_REQUEST_ID,
-      payload: null,
+      type: ActionType.SET_LOADING,
+      payload: false,
     });
   };
 };
@@ -63,8 +63,8 @@ export const removeTodo: ActionCreator<
 > = (id: string) => {
   return async (dispatch: Dispatch) => {
     dispatch({
-      type: ActionType.SET_REQUEST_ID,
-      payload: id,
+      type: ActionType.SET_LOADING,
+      payload: true,
     });
     try {
       const response = await api.deleteTodo(id);
@@ -80,8 +80,39 @@ export const removeTodo: ActionCreator<
       // err
     }
     dispatch({
-      type: ActionType.SET_REQUEST_ID,
-      payload: null,
+      type: ActionType.SET_LOADING,
+      payload: false,
+    });
+  };
+};
+
+export const deleteAllTodos: ActionCreator<
+  ThunkAction<Promise<any>, IRootState, null, Action>
+> = (todos: ITodo[]) => {
+  return async (dispatch: Dispatch) => {
+    dispatch({
+      type: ActionType.SET_LOADING,
+      payload: true,
+    });
+    try {
+      const ids = todos.map((item) => item.id);
+      const deleteAll = ids.map((id) => api.deleteTodo(id));
+
+      const response = await Promise.all(deleteAll);
+
+      if (response.every((item) => item.status === 200)) {
+        dispatch({
+          type: ActionType.GET_POST_TODOS_SUCCESS,
+          payload: [],
+        });
+        toast.success("Tasks successfully deleted");
+      }
+    } catch (err: any) {
+      // err
+    }
+    dispatch({
+      type: ActionType.SET_LOADING,
+      payload: false,
     });
   };
 };
@@ -91,8 +122,8 @@ export const updateTodo: ActionCreator<
 > = (updTodo: ITodo) => {
   return async (dispatch: Dispatch) => {
     dispatch({
-      type: ActionType.SET_REQUEST_ID,
-      payload: updTodo.id,
+      type: ActionType.SET_LOADING,
+      payload: true,
     });
     try {
       const response = await api.updateTodo(updTodo);
@@ -108,8 +139,8 @@ export const updateTodo: ActionCreator<
       // err
     }
     dispatch({
-      type: ActionType.SET_REQUEST_ID,
-      payload: null,
+      type: ActionType.SET_LOADING,
+      payload: false,
     });
   };
 };

@@ -7,7 +7,7 @@ import Switch from "../common/Switch";
 
 type Props = {
   type: "add" | "edit";
-  requestId: string | null;
+  loading: boolean;
   title?: string;
   onRequestClose: () => void;
   onSubmit: (values: any) => void;
@@ -15,7 +15,7 @@ type Props = {
 
 const TaskModal: React.FC<Props> = ({
   type,
-  requestId,
+  loading,
   title,
   onRequestClose,
   onSubmit,
@@ -87,13 +87,13 @@ const TaskModal: React.FC<Props> = ({
         <div className="footer">
           <button
             className="btn btn-cancel"
-            disabled={!!requestId}
+            disabled={loading}
             onClick={onRequestClose}
             type="button"
           >
             Cancel
           </button>
-          <button className="btn" disabled={!!requestId} type="submit">
+          <button className="btn" disabled={loading} type="submit">
             {type === "add" ? "Add" : "Update"}
           </button>
         </div>

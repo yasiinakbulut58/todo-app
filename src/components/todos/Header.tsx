@@ -9,7 +9,7 @@ import Modal from "../common/Modal";
 import TaskModal from "./Modal";
 
 type Props = {
-  requestId: string | null;
+  loading: boolean;
   addTodo: (todo: ITodo) => void;
   getTodos: (completed: string) => void;
 };
@@ -20,7 +20,7 @@ const list = [
   { value: "true", label: "Completed" },
 ];
 
-const Header: React.FC<Props> = ({ requestId, addTodo, getTodos }) => {
+const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = useCallback(
@@ -49,7 +49,7 @@ const Header: React.FC<Props> = ({ requestId, addTodo, getTodos }) => {
         />
         <button
           className="btn btn-add"
-          disabled={!!requestId}
+          disabled={loading}
           onClick={() => {
             setIsOpen(true);
           }}
@@ -65,7 +65,7 @@ const Header: React.FC<Props> = ({ requestId, addTodo, getTodos }) => {
         <TaskModal
           type="add"
           onRequestClose={() => setIsOpen(false)}
-          requestId={requestId}
+          loading={loading}
           onSubmit={onSubmit}
         />
       </Modal>
