@@ -32,6 +32,7 @@ const TaskModal: React.FC<Props> = ({ type, title, onSubmit }) => {
             <CustomInput
               type="text"
               defaultValue={title}
+              autoFocus
               placeholder="Write task..."
               autoComplete="off"
               {...register("title", { required: true, maxLength: 50 })}
