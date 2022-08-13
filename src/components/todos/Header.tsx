@@ -58,7 +58,7 @@ const Header: React.FC<Props> = ({ setFilter, addTodo }) => {
         onRequestClose={() => setIsOpen(false)}
         title="Add Task"
       >
-        <TaskModal type="add" onSubmit={onSubmit} formIsLoading={false} />
+        <TaskModal type="add" onSubmit={onSubmit} />
       </Modal>
     </>
   );

@@ -8,15 +8,9 @@ type Props = {
   type: "add" | "edit";
   title?: string;
   onSubmit: (values: any) => void;
-  formIsLoading: boolean;
 };
 
-const TaskModal: React.FC<Props> = ({
-  type,
-  title,
-  onSubmit,
-  formIsLoading,
-}) => {
+const TaskModal: React.FC<Props> = ({ type, title, onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -55,8 +49,8 @@ const TaskModal: React.FC<Props> = ({
           </div>
         </div>
         <div className="footer">
-          <button className="btn" type="submit" disabled={formIsLoading}>
-            {type === "add" ? "Ekle" : "Güncelle"}
+          <button className="btn" type="submit">
+            {type === "add" ? "Add" : "Update"}
           </button>
         </div>
       </Container>

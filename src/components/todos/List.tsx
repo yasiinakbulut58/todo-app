@@ -84,7 +84,6 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
           type="edit"
           title={selectedTask?.title}
           onSubmit={onSubmit}
-          formIsLoading={false}
         />
       </Modal>
     </ListWrapper>
