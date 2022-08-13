@@ -12,7 +12,6 @@ const TodoContainer = styled.div`
 
 const ListWrapper = styled.div`
   overflow-y: auto;
-  margin-left: -5px;
   max-height: 500px;
   position: relative;
 

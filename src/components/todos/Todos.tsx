@@ -40,6 +40,7 @@ export const Todos: React.FC<Props> = (props) => {
         {todos && todos.length > 0 && (
           <button
             className="btn btn-clear"
+            disabled={loading}
             onClick={() => setIsOpen(true)}
             type="button"
           >
