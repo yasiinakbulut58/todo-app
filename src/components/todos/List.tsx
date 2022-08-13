@@ -30,6 +30,48 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
     [updateTodo, selectedTask],
   );
 
+  const Todo = (todo: ITodo) => (
+    <>
+      {todo.completed && (
+        <div className="status">
+          <div className="completed">COMPLETED</div>
+        </div>
+      )}
+      <Switch
+        checked={todo.completed}
+        onChange={(e) => {
+          const { checked } = e.target;
+          updateTodo({ ...todo, completed: checked });
+        }}
+      />
+      <div className="content">
+        <TextWrapper completed={todo.completed}>{todo.title}</TextWrapper>
+        <span className="createdAt">{todo.createdAt}</span>
+      </div>
+      <div className="actions">
+        {!todo.completed && (
+          <button
+            type="button"
+            className="btn btn-edit"
+            onClick={() => {
+              setSelectedTask(todo);
+              setIsOpen(true);
+            }}
+          >
+            <Icon name="edit" />
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={() => removeTodo(todo.id)}
+          className="btn btn-clear"
+        >
+          <Icon name="delete" />
+        </button>
+      </div>
+    </>
+  );
+
   if (todos.length === 0 || !todos.length)
     return <EmptyWrapper>No task🥳</EmptyWrapper>;
 
@@ -41,38 +83,7 @@ const List: React.FC<Props> = ({ todos, removeTodo, updateTodo }) => {
           style={{ opacity: item.completed ? 0.5 : 1 }}
           key={idx}
         >
-          <Switch
-            checked={item.completed}
-            onChange={(e) => {
-              const { checked } = e.target;
-              updateTodo({ ...item, completed: checked });
-            }}
-          />
-          <div className="content">
-            <TextWrapper completed={item.completed}>{item.title}</TextWrapper>
-            <span className="createdAt">{item.createdAt}</span>
-          </div>
-          <div className="actions">
-            {!item.completed && (
-              <button
-                type="button"
-                className="btn btn-edit"
-                onClick={() => {
-                  setSelectedTask(item);
-                  setIsOpen(true);
-                }}
-              >
-                <Icon name="edit" />
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => removeTodo(item.id)}
-              className="btn btn-clear"
-            >
-              <Icon name="delete" />
-            </button>
-          </div>
+          <Todo {...item} />
         </div>
       ))}
       <Modal

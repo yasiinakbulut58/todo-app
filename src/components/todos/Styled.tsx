@@ -11,6 +11,25 @@ const TodoContainer = styled.div`
 `;
 
 const ListWrapper = styled.div`
+  overflow-y: auto;
+  width: calc(100% + 10px);
+  margin-left: -5px;
+  padding: 0 5px;
+  max-height: 500px;
+
+  scrollbar-width: thin; //for firefox
+  scrollbar-color: #035687 transparent; //for firefox
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #035687;
+  }
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -19,9 +38,40 @@ const ListWrapper = styled.div`
     display: flex;
     background: #fff;
     align-items: center;
-    padding: 10px;
+    padding: 15px 10px;
     gap: 10px;
     border-radius: 10px;
+    position: relative;
+
+    .status {
+      box-sizing: border-box;
+      margin: 0px;
+      min-width: 0px;
+      position: absolute;
+      top: 0px;
+      display: flex;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .completed {
+        background-color: rgb(111 187 21);
+        height: 20px;
+        margin-left: 10px;
+        padding: 0px 20px;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        user-select: none;
+        transition: padding 0.3s ease 0s, height 0.3s ease 0s;
+        font-size: 10px;
+        font-weight: 500;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
 
     .actions {
       display: flex;
