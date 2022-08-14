@@ -34,7 +34,7 @@ const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
           ...selectedTask,
           title: values.title,
           completed: values.completed || false,
-          deadline: values.deadline.toLocaleString(),
+          deadline: values.deadline ? values.deadline.toLocaleString() : "",
         });
       }
 
@@ -62,18 +62,14 @@ const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
       <div className="content">
         <TextWrapper completed={todo.completed}>{todo.title}</TextWrapper>
         <span className="createdAt">{todo.createdAt}</span>
-        {!todo.completed && (
+        {!todo.completed && todo.deadline && (
           <div className="deadline">
             <div
               className={`pending${isEnd(todo.deadline) ? " end" : " waiting"}`}
             >
               Deadline: {todo.deadline}
             </div>
-            {isEnd(todo.deadline) ? (
-              <Icon name="sad-emoji" />
-            ) : (
-              <Icon name="cool-emoji" />
-            )}
+            <Icon name={isEnd(todo.deadline) ? "sad-emoji" : "cool-emoji"} />
           </div>
         )}
       </div>

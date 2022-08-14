@@ -79,16 +79,20 @@ const TaskModal: React.FC<Props> = ({
               marginBottom: 20,
               display: "flex",
               flexDirection: "column",
+              width: "50%",
             }}
           >
             <CustomLabel htmlFor="text">Deadline</CustomLabel>
             <DatePicker
               selected={getValues("deadline") || null}
-              dateFormat="MM/dd/yyyy HH:mm:ss"
+              dateFormat="dd.MM.yyyy HH:mm:ss"
               autoComplete="off"
               placeholderText="Please select a date"
+              isClearable={true}
+              locale="en-GB"
+              clearButtonClassName="clear-button"
               showTimeInput
-              {...register("deadline", { required: true })}
+              {...register("deadline", { required: false })}
               onChange={(date) =>
                 setValue("deadline", date, {
                   shouldValidate: true,
@@ -96,11 +100,6 @@ const TaskModal: React.FC<Props> = ({
               }
               className="custom-datetimepicker"
             />
-            {errors.deadline && (
-              <div style={{ marginTop: 5, color: "red", fontSize: "12px" }}>
-                Required.
-              </div>
-            )}
           </div>
           <div
             style={{
@@ -188,6 +187,18 @@ const Container = styled.div`
 
     &:focus-visible {
       outline: initial;
+    }
+  }
+  .clear-button {
+    &::after {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    &:hover {
+      &::after {
+        box-shadow: 0 0 0 2px #216ba5;
+      }
     }
   }
   .footer {

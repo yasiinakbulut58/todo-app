@@ -69,7 +69,7 @@ const Container = styled.div`
       }
 
       &:hover {
-        box-shadow: 0 0 0 2px rgb(111 187 21);
+        box-shadow: 0 0 0 2px #035687;
       }
     }
     .btn[disabled] {

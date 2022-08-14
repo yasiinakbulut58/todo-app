@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
         title: values.title,
         completed: values.completed || false,
         createdAt: new Date().toLocaleString(),
-        deadline: values.deadline?.toLocaleString(),
+        deadline: values.deadline ? values.deadline?.toLocaleString() : "",
       });
       setIsOpen(false);
     },
@@ -65,6 +65,7 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
             <DatePicker
               selectsRange={true}
               startDate={startDate}
+              locale="en-GB"
               endDate={endDate}
               onChange={(update: any) => {
                 setDateRange(update);
