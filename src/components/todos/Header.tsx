@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { v4 as uuid } from "uuid";
+import DatePicker from "react-datepicker";
 
 import styled from "styled-components";
 import { ITodo } from "../../store/reducers/todosReducer";
@@ -11,7 +12,11 @@ import TaskModal from "./Modal";
 type Props = {
   loading: boolean;
   addTodo: (todo: ITodo) => void;
-  getTodos: (completed: string) => void;
+  getTodos: (
+    completed: string,
+    createdAt_gte: Date,
+    createdAt_lte?: Date,
+  ) => void;
 };
 
 const list = [
@@ -22,6 +27,8 @@ const list = [
 
 const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [completedStatus, setCompletedStatus] = useState("all");
+  // const [startDate, setStartDate] = useState(new Date());
 
   const onSubmit = useCallback(
     (values: { title: string; completed: boolean }) => {
@@ -36,17 +43,41 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
     [],
   );
 
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const [startDate, endDate] = dateRange;
+
   return (
     <>
       <HeaderWrapper>
         <span>Todo List</span>
       </HeaderWrapper>
       <div className="header">
-        <Dropdown
-          list={list}
-          onSelected={(value) => getTodos(value)}
-          defaultValue="all"
-        />
+        <div className="filter">
+          <Dropdown
+            list={list}
+            onSelected={(value) => {
+              setCompletedStatus(value);
+              getTodos(value, startDate, endDate);
+            }}
+            defaultValue="all"
+          />
+          <div className="date-filter">
+            <DatePicker
+              selectsRange={true}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update: any) => {
+                setDateRange(update);
+                const [sD, eD] = update;
+                if (sD && eD) {
+                  getTodos(completedStatus, sD, eD);
+                }
+              }}
+              isClearable={false}
+              className="custom-datepicker"
+            />
+          </div>
+        </div>
         <button
           className="btn btn-add"
           disabled={loading}

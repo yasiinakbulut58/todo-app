@@ -8,14 +8,18 @@ import { IRootState, ITodo } from "../reducers/todosReducer";
 
 export const getTodos: ActionCreator<
   ThunkAction<Promise<any>, IRootState, null, Action>
-> = (completed: string) => {
+> = (completed: string, createdAt_gte: Date, createdAt_lte?: Date) => {
   return async (dispatch: Dispatch) => {
     dispatch({
       type: ActionType.GET_POST_TODOS_PENDING,
     });
 
     try {
-      const { data } = await api.getTodos(completed);
+      const { data } = await api.getTodos(
+        completed,
+        createdAt_gte,
+        createdAt_lte,
+      );
 
       dispatch({
         type: ActionType.GET_POST_TODOS_SUCCESS,

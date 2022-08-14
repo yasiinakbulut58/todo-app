@@ -8,7 +8,11 @@ import List from "./List";
 import { ContentWrapper, TodoContainer } from "./Styled";
 
 type Props = IRootState & {
-  getTodos: (completed: string) => void;
+  getTodos: (
+    completed: string,
+    createdAt_gte: Date,
+    createdAt_lte?: Date,
+  ) => void;
   addTodo: (todo: ITodo) => void;
   removeTodo: (id: string) => void;
   updateTodo: (updTodo: ITodo) => void;

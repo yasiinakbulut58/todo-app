@@ -182,6 +182,35 @@ const ContentWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
+    .filter {
+      display: flex;
+      gap: 10px;
+      @media screen and (max-width: 450px) {
+        flex-direction: column;
+        .custom-datepicker {
+          width: 140px !important;
+        }
+      }
+
+      .custom-datepicker {
+        height: 40px;
+        width: 150px;
+        border-radius: 10px;
+        padding-bottom: 2px;
+        padding-right: 10px;
+        padding-left: 15px;
+        border: none;
+        box-shadow: inset 0 0 0 100px #fff;
+        background: #fff;
+        -webkit-transition: 200ms;
+        transition: 200ms;
+
+        &:focus-visible {
+          outline: initial;
+        }
+      }
+    }
   }
 `;
 

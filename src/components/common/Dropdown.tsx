@@ -67,14 +67,14 @@ export const Dropdown: React.FC<Props> = ({
 };
 
 const Container = styled.div`
-  width: 170px;
+  width: 165px;
   border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   background-color: white;
   position: relative;
 
   .dropdown-header {
-    padding: 15px;
+    padding: 10px 15px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
