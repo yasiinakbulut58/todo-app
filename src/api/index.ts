@@ -12,9 +12,10 @@ class API {
     const searchParams = new URLSearchParams({
       _sort: "createdAt",
       _order: "desc",
-      createdAt_gte: createdAt_gte.toLocaleDateString(),
+      createdAt_gte: createdAt_gte.toLocaleDateString("tr-TR"),
       createdAt_lte:
-        createdAt_lte?.toLocaleDateString() || oneDayLater.toLocaleDateString(),
+        createdAt_lte?.toLocaleDateString("tr-TR") ||
+        oneDayLater.toLocaleDateString("tr-TR"),
       ...(completed !== "all" ? { completed: completed } : {}),
     });
     const options = {
