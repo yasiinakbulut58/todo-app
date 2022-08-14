@@ -89,7 +89,6 @@ const TaskModal: React.FC<Props> = ({
               autoComplete="off"
               placeholderText="Please select a date"
               isClearable={true}
-              locale="en-GB"
               clearButtonClassName="clear-button"
               showTimeInput
               {...register("deadline", { required: false })}

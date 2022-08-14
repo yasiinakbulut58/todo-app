@@ -43,7 +43,10 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
     [],
   );
 
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const [dateRange, setDateRange] = useState([
+    new Date(),
+    new Date(new Date().getTime() + 86400000),
+  ]);
   const [startDate, endDate] = dateRange;
 
   return (
@@ -65,7 +68,8 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
             <DatePicker
               selectsRange={true}
               startDate={startDate}
-              locale="en-GB"
+              dateFormat="dd.MM.yyyy"
+              autoComplete="off"
               endDate={endDate}
               onChange={(update: any) => {
                 setDateRange(update);
