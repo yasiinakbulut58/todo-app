@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { IRootState, ITodo } from "../../store/reducers/todosReducer";
 import Modal from "../common/Modal";
@@ -12,7 +12,7 @@ type Props = IRootState & {
   addTodo: (todo: ITodo) => void;
   removeTodo: (id: string) => void;
   updateTodo: (updTodo: ITodo) => void;
-  deleteAllTodos: (allTodos: ITodo[]) => void;
+  deleteCompletedTodos: (allTodos: ITodo[]) => void;
 };
 
 export const Todos: React.FC<Props> = (props) => {
@@ -23,9 +23,14 @@ export const Todos: React.FC<Props> = (props) => {
     addTodo,
     removeTodo,
     updateTodo,
-    deleteAllTodos,
+    deleteCompletedTodos,
     getTodos,
   } = props;
+
+  const completedTodos = useMemo(
+    () => todos?.filter((item) => item.completed),
+    [todos],
+  );
 
   return (
     <TodoContainer>
@@ -37,14 +42,14 @@ export const Todos: React.FC<Props> = (props) => {
           removeTodo={removeTodo}
           updateTodo={updateTodo}
         />
-        {todos && todos.length > 0 && (
+        {completedTodos && completedTodos.length > 0 && (
           <button
             className="btn btn-clear"
             disabled={loading}
             onClick={() => setIsOpen(true)}
             type="button"
           >
-            Clear All
+            Clear Completed
           </button>
         )}
         <Modal
@@ -54,10 +59,10 @@ export const Todos: React.FC<Props> = (props) => {
         >
           <ConfirmModal
             loading={loading}
-            desc="Are you sure you want to delete all?"
+            desc="Are you sure you want to delete completed tasks?"
             onRequestClose={() => setIsOpen(false)}
             onDelete={() => {
-              deleteAllTodos(todos);
+              deleteCompletedTodos(completedTodos);
               setIsOpen(false);
             }}
           />

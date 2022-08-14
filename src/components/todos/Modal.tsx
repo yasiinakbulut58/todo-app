@@ -94,7 +94,7 @@ const TaskModal: React.FC<Props> = ({
             Cancel
           </button>
           <button className="btn" disabled={loading} type="submit">
-            {type === "add" ? "Add" : "Update"}
+            {type === "add" ? "Create Task" : "Update"}
           </button>
         </div>
       </Container>

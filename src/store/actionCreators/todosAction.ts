@@ -86,7 +86,7 @@ export const removeTodo: ActionCreator<
   };
 };
 
-export const deleteAllTodos: ActionCreator<
+export const deleteCompletedTodos: ActionCreator<
   ThunkAction<Promise<any>, IRootState, null, Action>
 > = (todos: ITodo[]) => {
   return async (dispatch: Dispatch) => {
@@ -102,8 +102,7 @@ export const deleteAllTodos: ActionCreator<
 
       if (response.every((item) => item.status === 200)) {
         dispatch({
-          type: ActionType.GET_POST_TODOS_SUCCESS,
-          payload: [],
+          type: ActionType.SET_INCOMPLETED_TODOS,
         });
         toast.success("Tasks successfully deleted");
       }

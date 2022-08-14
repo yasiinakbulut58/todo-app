@@ -6,12 +6,13 @@ export enum ActionType {
   GET_POST_TODOS_FAIL = "GET_POST_TODOS_FAIL",
   SET_ADD_TODO = "SET_ADD_TODO",
   SET_REMOVE_TODO = "SET_REMOVE_TODO",
+  SET_INCOMPLETED_TODOS = "SET_INCOMPLETED_TODOS",
   SET_UPDATE_TODO = "SET_UPDATE_TODO",
   SET_LOADING = "SET_LOADING",
 }
 
 interface actionPending {
-  type: ActionType.GET_POST_TODOS_PENDING;
+  type: ActionType.GET_POST_TODOS_PENDING | ActionType.SET_INCOMPLETED_TODOS;
 }
 
 interface actionSuccess {

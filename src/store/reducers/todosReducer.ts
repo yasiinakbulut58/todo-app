@@ -57,6 +57,11 @@ export const todoReducer: Reducer<IRootState, Action> = (
         ...state,
         todos: state.todos.filter((item) => item.id !== action.payload),
       };
+    case ActionType.SET_INCOMPLETED_TODOS:
+      return {
+        ...state,
+        todos: state.todos.filter((item) => !item.completed),
+      };
     case ActionType.SET_UPDATE_TODO:
       return {
         ...state,
