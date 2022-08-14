@@ -79,7 +79,7 @@ const TaskModal: React.FC<Props> = ({
               marginBottom: 20,
               display: "flex",
               flexDirection: "column",
-              width: "50%",
+              width: "max-content",
             }}
           >
             <CustomLabel htmlFor="text">Deadline</CustomLabel>
@@ -146,10 +146,9 @@ const TaskModal: React.FC<Props> = ({
 const Container = styled.div`
   .custom-datetimepicker {
     height: 40px;
-    width: 150px;
     border-radius: 10px;
     padding-bottom: 2px;
-    padding-right: 10px;
+    padding-right: 25px;
     padding-left: 20px;
     border: 1px solid #035687;
     box-shadow: inset 0 0 0 100px #fff;
@@ -189,6 +188,7 @@ const Container = styled.div`
     }
   }
   .clear-button {
+    right: 2px;
     &::after {
       font-size: 13px;
       font-weight: 600;

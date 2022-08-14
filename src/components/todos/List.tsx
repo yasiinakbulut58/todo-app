@@ -34,7 +34,9 @@ const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
           ...selectedTask,
           title: values.title,
           completed: values.completed || false,
-          deadline: values.deadline ? values.deadline.toLocaleString() : "",
+          deadline: values.deadline
+            ? values.deadline.toLocaleString("tr-TR")
+            : "",
         });
       }
 

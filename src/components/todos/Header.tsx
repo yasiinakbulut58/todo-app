@@ -35,8 +35,10 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
         id: uuid(),
         title: values.title,
         completed: values.completed || false,
-        createdAt: new Date().toLocaleString(),
-        deadline: values.deadline ? values.deadline?.toLocaleString() : "",
+        createdAt: new Date().toLocaleString("tr-TR"),
+        deadline: values.deadline
+          ? values.deadline?.toLocaleString("tr-TR")
+          : "",
       });
       setIsOpen(false);
     },
