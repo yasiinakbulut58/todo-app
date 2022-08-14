@@ -54,7 +54,12 @@ const TaskModal: React.FC<Props> = ({
               flexDirection: "column",
             }}
           >
-            <CustomLabel htmlFor="text">Task</CustomLabel>
+            <CustomLabel htmlFor="text" style={{ display: "flex" }}>
+              Task{" "}
+              <div style={{ marginLeft: 2, color: "red", fontSize: "12px" }}>
+                *
+              </div>
+            </CustomLabel>
             <CustomInput
               type="text"
               defaultValue={title}
@@ -65,7 +70,7 @@ const TaskModal: React.FC<Props> = ({
             />
             {errors.title && errors.title.type === "required" && (
               <div style={{ marginTop: 5, color: "red", fontSize: "12px" }}>
-                Required.
+                This field is required.
               </div>
             )}
             {errors.title && errors.title.type === "maxLength" && (
@@ -135,7 +140,7 @@ const TaskModal: React.FC<Props> = ({
             Cancel
           </button>
           <button className="btn" disabled={loading} type="submit">
-            {type === "add" ? "Create Task" : "Update"}
+            {type === "add" ? "Add Task" : "Update"}
           </button>
         </div>
       </Container>

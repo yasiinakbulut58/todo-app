@@ -14,7 +14,13 @@ import { getTodos } from "./store/actionCreators/todosAction";
 
 // Generate the store
 const store = configureStore();
-store.dispatch(getTodos("all", new Date()));
+store.dispatch(
+  getTodos(
+    "all",
+    new Date(new Date().getTime() - 86400000 * 5), // 5 days ago
+    new Date(new Date().getTime() + 86400000),
+  ),
+);
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
