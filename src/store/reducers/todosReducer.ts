@@ -6,6 +6,7 @@ export interface ITodo {
   title: string;
   createdAt: string;
   completed: boolean;
+  deadline: string;
 }
 
 export interface IRootState {

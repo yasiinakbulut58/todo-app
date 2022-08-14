@@ -4,7 +4,7 @@ import Icon from "../common/Icon";
 import { ListWrapper, TextWrapper } from "./Styled";
 import styled from "styled-components";
 import Modal from "../common/Modal";
-import TaskModal from "./Modal";
+import TaskModal, { convertFromToLocaleString } from "./Modal";
 import { useCallback, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 
@@ -14,18 +14,27 @@ type Props = {
   removeTodo: (id: string) => void;
   updateTodo: (updTodo: ITodo) => void;
 };
+
+const isEnd = (deadline: string) => {
+  const diffTime =
+    new Date().getTime() -
+    new Date(convertFromToLocaleString(deadline)).getTime();
+  return diffTime > 0;
+};
+
 const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenConfirm, setIsOpenConfirm] = useState(false);
   const [selectedTask, setSelectedTask] = useState<ITodo | null>(null);
 
   const onSubmit = useCallback(
-    (values: { title: string; completed: boolean }) => {
+    (values: { title: string; completed: boolean; deadline: Date }) => {
       if (selectedTask) {
         updateTodo({
           ...selectedTask,
           title: values.title,
           completed: values.completed || false,
+          deadline: values.deadline.toLocaleString(),
         });
       }
 
@@ -53,6 +62,20 @@ const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
       <div className="content">
         <TextWrapper completed={todo.completed}>{todo.title}</TextWrapper>
         <span className="createdAt">{todo.createdAt}</span>
+        {!todo.completed && (
+          <div className="deadline">
+            <div
+              className={`pending${isEnd(todo.deadline) ? " end" : " waiting"}`}
+            >
+              Deadline: {todo.deadline}
+            </div>
+            {isEnd(todo.deadline) ? (
+              <Icon name="sad-emoji" />
+            ) : (
+              <Icon name="cool-emoji" />
+            )}
+          </div>
+        )}
       </div>
       <div className="actions">
         {!todo.completed && (
@@ -119,6 +142,7 @@ const List: React.FC<Props> = ({ todos, loading, removeTodo, updateTodo }) => {
             setSelectedTask(null);
           }}
           title={selectedTask?.title}
+          deadline={selectedTask?.deadline}
           onSubmit={onSubmit}
         />
       </Modal>

@@ -1,7 +1,7 @@
 const Icon = ({
   name,
 }: {
-  name: "add" | "delete" | "edit" | "right-arrow";
+  name: "add" | "delete" | "edit" | "right-arrow" | "sad-emoji" | "cool-emoji";
 }) => {
   switch (name) {
     case "add":
@@ -105,6 +105,30 @@ const Icon = ({
           <g></g>
           <g></g>
           <g></g>
+        </svg>
+      );
+    case "sad-emoji":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="20px"
+          height="20px"
+          fill="#ff2d55"
+        >
+          <path d="M8 11V9a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm7 1a1 1 0 0 0 1-1V9a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1zm-3 2a6.036 6.036 0 0 0-4.775 2.368 1 1 0 1 0 1.55 1.264 4 4 0 0 1 6.45 0 1 1 0 0 0 1.55-1.264A6.036 6.036 0 0 0 12 14zm11-2A11 11 0 1 1 12 1a11.013 11.013 0 0 1 11 11zm-2 0a9 9 0 1 0-9 9 9.01 9.01 0 0 0 9-9z" />
+        </svg>
+      );
+    case "cool-emoji":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="20px"
+          height="20px"
+          fill="#f1c40f"
+        >
+          <path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1zm0 20a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm4.632-6.775a1 1 0 0 1 .143 1.407A6.036 6.036 0 0 1 12 18a1 1 0 0 1 0-2 4.045 4.045 0 0 0 3.225-1.632 1 1 0 0 1 1.407-.143zM18 8a1 1 0 0 1 1 1 4 4 0 0 1-4 4 2 2 0 0 1-2-2v-1h-2v1a2 2 0 0 1-2 2 4 4 0 0 1-4-4 1 1 0 0 1 1-1h4a1 1 0 0 1 1 1h2a1 1 0 0 1 1-1z" />
         </svg>
       );
     default:

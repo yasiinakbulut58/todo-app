@@ -27,6 +27,7 @@ const ListWrapper = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: #035687;
+    border-radius: 5px;
   }
   display: flex;
   flex-direction: column;
@@ -65,10 +66,34 @@ const ListWrapper = styled.div`
     display: flex;
     background: #fff;
     align-items: center;
-    padding: 15px 10px;
+    padding: 20px 10px;
     gap: 10px;
     border-radius: 10px;
     position: relative;
+    .deadline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .pending {
+        background-color: #f1c40f;
+        padding: 5px 10px;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        user-select: none;
+        transition: padding 0.3s ease 0s, height 0.3s ease 0s;
+        font-size: 10px;
+        font-weight: 500;
+        border-radius: 5px;
+
+        &.end {
+          background-color: #ff2d55;
+        }
+      }
+    }
 
     .status {
       box-sizing: border-box;
@@ -82,7 +107,7 @@ const ListWrapper = styled.div`
 
       .completed {
         background-color: rgb(111 187 21);
-        height: 25px;
+        height: 20px;
         margin-left: 10px;
         padding: 0px 20px;
         display: flex;

@@ -1,22 +1,29 @@
 import { Controller, useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
 import styled from "styled-components";
-import CustomInput from "../common/Input";
 
+import CustomInput from "../common/Input";
 import CustomLabel from "../common/Label";
 import Switch from "../common/Switch";
+import { useEffect } from "react";
 
 type Props = {
   type: "add" | "edit";
   loading: boolean;
   title?: string;
+  deadline?: string;
   onRequestClose: () => void;
   onSubmit: (values: any) => void;
 };
+
+export const convertFromToLocaleString = (date: string) =>
+  date ? `${date.slice(3, 5)}.${date.slice(0, 2)}${date.slice(5)}` : date;
 
 const TaskModal: React.FC<Props> = ({
   type,
   loading,
   title,
+  deadline,
   onRequestClose,
   onSubmit,
 }) => {
@@ -24,9 +31,17 @@ const TaskModal: React.FC<Props> = ({
     register,
     handleSubmit,
     setValue,
+    getValues,
     control,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (deadline)
+      setValue("deadline", new Date(convertFromToLocaleString(deadline)), {
+        shouldValidate: true,
+      });
+  }, [deadline]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -59,30 +74,58 @@ const TaskModal: React.FC<Props> = ({
               </div>
             )}
           </div>
-        </div>
-        <div
-          style={{
-            marginBottom: 20,
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <CustomLabel htmlFor="completed">Completed</CustomLabel>
-          <Controller
-            render={() => (
-              <Switch
-                defaultChecked={false}
-                onChange={(e) => {
-                  const { checked } = e.target;
-                  setValue("completed", checked, {
-                    shouldValidate: true,
-                  });
-                }}
-              />
+          <div
+            style={{
+              marginBottom: 20,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <CustomLabel htmlFor="text">Deadline</CustomLabel>
+            <DatePicker
+              selected={getValues("deadline") || null}
+              dateFormat="MM/dd/yyyy HH:mm:ss"
+              autoComplete="off"
+              placeholderText="Please select a date"
+              showTimeInput
+              {...register("deadline", { required: true })}
+              onChange={(date) =>
+                setValue("deadline", date, {
+                  shouldValidate: true,
+                })
+              }
+              className="custom-datetimepicker"
+            />
+            {errors.deadline && (
+              <div style={{ marginTop: 5, color: "red", fontSize: "12px" }}>
+                Required.
+              </div>
             )}
-            name="completed"
-            control={control}
-          />
+          </div>
+          <div
+            style={{
+              marginBottom: 20,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <CustomLabel htmlFor="completed">Completed</CustomLabel>
+            <Controller
+              render={() => (
+                <Switch
+                  defaultChecked={false}
+                  onChange={(e) => {
+                    const { checked } = e.target;
+                    setValue("completed", checked, {
+                      shouldValidate: true,
+                    });
+                  }}
+                />
+              )}
+              name="completed"
+              control={control}
+            />
+          </div>
         </div>
         <div className="footer">
           <button
@@ -103,6 +146,50 @@ const TaskModal: React.FC<Props> = ({
 };
 
 const Container = styled.div`
+  .custom-datetimepicker {
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    padding-bottom: 2px;
+    padding-right: 10px;
+    padding-left: 20px;
+    border: 1px solid #035687;
+    box-shadow: inset 0 0 0 100px #fff;
+    background: #fff;
+    -webkit-transition: 200ms;
+    transition: 200ms;
+
+    &::placeholder {
+      transition: 200ms;
+    }
+
+    &:focus {
+      outline: none;
+      &::placeholder {
+        transform: translateX(10%);
+        color: transparent;
+      }
+    }
+
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: #035687;
+      box-shadow: 0 0 0 1px #035687;
+    }
+
+    :-ms-input-placeholder {
+      opacity: 0.5;
+    }
+
+    ::placeholder {
+      opacity: 0.5;
+    }
+
+    &:focus-visible {
+      outline: initial;
+    }
+  }
   .footer {
     display: flex;
     align-items: center;

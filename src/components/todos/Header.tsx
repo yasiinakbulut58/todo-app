@@ -28,15 +28,15 @@ const list = [
 const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [completedStatus, setCompletedStatus] = useState("all");
-  // const [startDate, setStartDate] = useState(new Date());
 
   const onSubmit = useCallback(
-    (values: { title: string; completed: boolean }) => {
+    (values: { title: string; completed: boolean; deadline: Date }) => {
       addTodo({
         id: uuid(),
         title: values.title,
         completed: values.completed || false,
         createdAt: new Date().toLocaleString(),
+        deadline: values.deadline?.toLocaleString(),
       });
       setIsOpen(false);
     },

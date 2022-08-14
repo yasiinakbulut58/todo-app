@@ -11,7 +11,7 @@ Todo-App it is a project by using React ,Redux, Typescript, Axios, JsonServer, S
 
 ## Project Description
 
-In the project we will be using `React.js` and `redux` to state management, we will be creating a Complete Todo Application with all features such as editing, adding, deleting tasks.
+In the project we will be using `React.js` and `redux` to state management, we will be creating a Complete Todo Application with all features such as filtering by datefrom-dateto and completed, updating with completed-title-deadline, adding, deleting tasks. List shows deadline for incompleted task with a sad or happy emoji.
 And also using eslint, prettier. 
 
 ```shell
