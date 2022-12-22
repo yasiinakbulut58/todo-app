@@ -17,7 +17,7 @@ const store = configureStore();
 store.dispatch(
   getTodos(
     "all",
-    new Date(new Date().getTime() - 86400000 * 5), // 5 days ago
+    new Date(new Date().getTime() - 86400000 * 50), // 50 days ago
     new Date(new Date().getTime() + 86400000),
   ),
 );
