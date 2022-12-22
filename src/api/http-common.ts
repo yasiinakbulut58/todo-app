@@ -6,6 +6,7 @@ export const jsonServer = axios.create({
     "Content-Type": "application/json",
   },
   withCredentials: false,
+  baseURL: "https://todo-list-server-ten.vercel.app",
 });
 
 jsonServer.interceptors.response.use(

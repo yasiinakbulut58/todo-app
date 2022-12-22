@@ -32,7 +32,7 @@ class API {
       headers: {
         "Content-Type": "application/json",
       },
-      data: newTodo,
+      data: JSON.stringify(newTodo),
     };
     return http.jsonServer(options);
   }
@@ -44,7 +44,7 @@ class API {
         "Content-Type": "application/json",
       },
       url: encodeURI(`/todos/${updTodo.id}`),
-      data: updTodo,
+      data: JSON.stringify(updTodo),
     };
     return http.jsonServer(options);
   }

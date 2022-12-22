@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
 
-import { IRootState, ITodo } from "../../store/reducers/todosReducer";
+import {
+  IAddModel,
+  IRootState,
+  ITodo,
+} from "../../store/reducers/todosReducer";
 import Modal from "../common/Modal";
 import ConfirmModal from "./ConfirmModal";
 import Header from "./Header";
@@ -13,7 +17,7 @@ type Props = IRootState & {
     createdAt_gte: Date,
     createdAt_lte?: Date,
   ) => void;
-  addTodo: (todo: ITodo) => void;
+  addTodo: (todo: IAddModel) => void;
   removeTodo: (id: string) => void;
   updateTodo: (updTodo: ITodo) => void;
   deleteCompletedTodos: (allTodos: ITodo[]) => void;
@@ -31,15 +35,10 @@ export const Todos: React.FC<Props> = (props) => {
     getTodos,
   } = props;
 
-  const completedTodos = useMemo(() => {
-    let filteredTodos: ITodo[] = [];
-    if (todos && todos.length > 0) {
-      for (let i = 0; i < todos.length; i++) {
-        if (todos[i].completed) filteredTodos.push(todos[i]);
-      }
-    }
-    return filteredTodos;
-  }, [todos]);
+  const completedTodos = useMemo(
+    () => todos?.filter((item) => item.completed),
+    [todos],
+  );
 
   return (
     <TodoContainer>

@@ -48,7 +48,7 @@ export const addTodo: ActionCreator<
       if (response.status === 201) {
         dispatch({
           type: ActionType.SET_ADD_TODO,
-          payload: newTodo,
+          payload: { ...newTodo, id: response.data.id },
         });
         toast.success("Task successfully added");
       }

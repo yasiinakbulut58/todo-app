@@ -9,6 +9,13 @@ export interface ITodo {
   deadline: string;
 }
 
+export interface IAddModel {
+  title: string;
+  createdAt: string;
+  completed: boolean;
+  deadline: string;
+}
+
 export interface IRootState {
   todos: ITodo[];
   loading: boolean;

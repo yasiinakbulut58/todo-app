@@ -1,9 +1,8 @@
 import { useCallback, useState } from "react";
-import { v4 as uuid } from "uuid";
 import DatePicker from "react-datepicker";
 
 import styled from "styled-components";
-import { ITodo } from "../../store/reducers/todosReducer";
+import { IAddModel } from "../../store/reducers/todosReducer";
 import { Dropdown } from "../common/Dropdown";
 import Icon from "../common/Icon";
 import Modal from "../common/Modal";
@@ -11,7 +10,7 @@ import TaskModal from "./Modal";
 
 type Props = {
   loading: boolean;
-  addTodo: (todo: ITodo) => void;
+  addTodo: (todo: IAddModel) => void;
   getTodos: (
     completed: string,
     createdAt_gte: Date,
@@ -32,7 +31,6 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
   const onSubmit = useCallback(
     (values: { title: string; completed: boolean; deadline: Date }) => {
       addTodo({
-        id: uuid(),
         title: values.title,
         completed: values.completed || false,
         createdAt: new Date().toLocaleString("tr-TR"),
@@ -46,7 +44,7 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
   );
 
   const [dateRange, setDateRange] = useState([
-    new Date(new Date().getTime() - 86400000 * 50), // 50 days ago
+    new Date(new Date().getTime() - 86400000 * 1000), // 1000 days ago
     new Date(new Date().getTime() + 86400000),
   ]);
   const [startDate, endDate] = dateRange;
