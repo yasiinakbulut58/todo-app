@@ -44,7 +44,7 @@ const Header: React.FC<Props> = ({ loading, addTodo, getTodos }) => {
   );
 
   const [dateRange, setDateRange] = useState([
-    new Date(new Date().getTime() - 86400000 * 1000), // 1000 days ago
+    new Date(new Date().getTime() - 86400000 * 200), // 200 days ago
     new Date(new Date().getTime() + 86400000),
   ]);
   const [startDate, endDate] = dateRange;

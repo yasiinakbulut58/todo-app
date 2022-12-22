@@ -32,7 +32,12 @@ class API {
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.stringify(newTodo),
+      data: JSON.stringify({
+        title: newTodo.title,
+        createdAt: newTodo.createdAt,
+        completed: newTodo.completed,
+        deadline: newTodo.deadline,
+      }),
     };
     return http.jsonServer(options);
   }
@@ -44,7 +49,12 @@ class API {
         "Content-Type": "application/json",
       },
       url: encodeURI(`/todos/${updTodo.id}`),
-      data: JSON.stringify(updTodo),
+      data: JSON.stringify({
+        title: updTodo.title,
+        createdAt: updTodo.createdAt,
+        completed: updTodo.completed,
+        deadline: updTodo.deadline,
+      }),
     };
     return http.jsonServer(options);
   }
