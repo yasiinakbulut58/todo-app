@@ -34,9 +34,9 @@ export const Todos: React.FC<Props> = (props) => {
   const completedTodos = useMemo(() => {
     let filteredTodos: ITodo[] = [];
     if (todos && todos.length > 0) {
-      todos.forEach((item) => {
-        if (item.completed) filteredTodos.push(item);
-      });
+      for (let i = 0; i < todos.length; i++) {
+        if (todos[i].completed) filteredTodos.push(todos[i]);
+      }
     }
     return filteredTodos;
   }, [todos]);

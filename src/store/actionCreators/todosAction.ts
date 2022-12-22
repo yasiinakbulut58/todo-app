@@ -23,7 +23,7 @@ export const getTodos: ActionCreator<
 
       dispatch({
         type: ActionType.GET_POST_TODOS_SUCCESS,
-        payload: data,
+        payload: data || [],
       });
     } catch (err: any) {
       dispatch({
