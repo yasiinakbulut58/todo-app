@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { IRootState, ITodo } from "../../store/reducers/todosReducer";
 import Modal from "../common/Modal";
@@ -31,10 +31,10 @@ export const Todos: React.FC<Props> = (props) => {
     getTodos,
   } = props;
 
-  const completedTodos = useMemo(
-    () => todos?.filter((item) => item.completed),
-    [todos],
-  );
+  // eslint-disable-next-line no-console
+  console.log(todos);
+
+  const completedTodos = todos ? todos.filter((item) => item?.completed) : [];
 
   return (
     <TodoContainer>
